@@ -1,0 +1,21 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_add_storage.html 
+keywords:  
+summary:  
+---
+= Añada almacenamiento
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Siga los pasos de esta sección para añadir almacenamiento.
+
+. En el panel de navegación izquierdo del plug-in SCV, haga clic en *Sistemas de almacenamiento* y luego seleccione la opción *Agregar*.
+. En el cuadro de diálogo Add Storage System, introduzca la información básica de SVM o del clúster y seleccione *Add*.
+

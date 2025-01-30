@@ -1,0 +1,89 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_minimum_ontap_privileges_required.html 
+keywords:  
+summary: Los privilegios mínimos requeridos de ONTAP varían en función de los plugins de SnapCenter que utilice para la protección de datos. 
+---
+= Se requieren privilegios de ONTAP
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Los privilegios mínimos requeridos de ONTAP varían en función de los plugins de SnapCenter que utilice para la protección de datos.
+
+
+NOTE: A partir del plugin de SnapCenter para VMware (SCV) 5,0, es necesario añadir aplicaciones de tipo HTTP y ONTAPI como métodos de inicio de sesión de usuario para cualquier usuario de ONTAP con acceso personalizado basado en roles a SCV. Sin el acceso a estas aplicaciones, los backups fallarán. Es necesario reiniciar el servicio de SCV para reconocer los cambios en los métodos de inicio de sesión de usuarios de ONTAP.
+
+
+
+== Privilegios mínimos requeridos de ONTAP
+
+Todos los plugins de SnapCenter requieren los siguientes privilegios mínimos.
+
+|===
+
+
+| Comandos de acceso total: Privilegios mínimos requeridos para ONTAP 8,3 y versiones posteriores. 
+
+
+| event generate-autosupport-log 
+
+
+| el historial del trabajo muestra el trabajo muestra la detención del trabajo 
+
+
+| lun lun lun create lun delete lun igroup add lun igroup create lun igroup delete lun igroup rename lun igroup show lun mapping add-reporting-nodes lun mapping create lun mapping delete lun mapping remove-reporting-nodes mapa de lun show lun modify lun move-in-volume lun offline lun online lun persistent-reservation clear lun redimensione lun serial lun muestra de lun 
+
+
+| lista de destinos de snapmirror política de snapmirror complemento regla de snapmirror política de modificación-regla de snapmirror política de eliminación regla de snapmirror política de snapmirror mostrar snapmirror restaurar snapmirror mostrar el historial de snapmirror actualización de snapmirror conjunto de complementos de snapmirror 
+
+
+| Versión 
+
+
+| clon de volumen crear clon de volumen mostrar clon de volumen iniciar división de clon de volumen detener volumen crear volumen eliminar volumen destruir volumen clon de archivo crear archivo mostrar disco uso volumen volumen sin conexión volumen en línea modificar volumen qtree crear volumen qtree eliminar volumen qtree modificar qtree mostrar volumen restringir volumen mostrar volumen mostrar volumen mostrar volumen mostrar volumen mostrar volumen mostrar volumen mostrar volumen mostrar volumen snapshot crear snapshot de volumen eliminar snapshot de volumen modificar snapshot de volumen cambiar nombre de snapshot de volumen restauración snapshot de volumen restauración de archivo snapshot mostrar volumen desmontar 
+
+
+| vserver cifs vserver compartir cifs crear vserver compartir cifs eliminar vserver cifs shadowcopy mostrar vserver compartir cifs mostrar vserver cifs mostrar vserver política de exportación vserver política de exportación crear vserver política de exportación eliminar regla de política de exportación de vserver crear regla de política de exportación de vserver mostrar política de exportación de vserver mostrar vserver iscsi vserver conexión iscsi mostrar vserver subsistema vserver nvme controlador subsistema nvme de vserver controladora show subsistema nvme de vserver mapa subsistema nvme de vserver mapa show subsistema nvme de vserver mapa add subsistema nvme de vserver mapa remove subsistema nvme host show subsistema nvme de vserver host add subsistema nvme de vserver host remove subsistema de vserver nvme show subsistema de vserver nvme delete espacio de nombres de vserver nvme mostrar grupos de conmutación por error de interfaz de red 
+|===
+|===
+| Comandos de solo lectura: Privilegios mínimos requeridos para ONTAP 8.3 y versiones posteriores 
+
+
+| identidad del clúster mostrar la interfaz de red mostrar vserver vserver peer vserver show 
+|===
+Puede ignorar el comando _cluster identity show_ cluster level al crear un rol para asociarlo con el vServer de datos.
+
+
+NOTE: Puede ignorar los mensajes de advertencia acerca de los comandos de vServer no compatibles.
+
+
+
+== Información adicional sobre ONTAP
+
+* Si utiliza ONTAP 8.2.x:
++
+Debe iniciar sesión como `vsadmin` en la máquina virtual de almacenamiento a fin de tener los privilegios pertinentes para las operaciones del plugin de SnapCenter para VMware vSphere.
+
+* Si utiliza ONTAP 8.3 y versiones posteriores:
++
+Debe iniciar sesión `vsadmin` como o con un rol que tenga los privilegios mínimos indicados en las tablas anteriores.
+
+* Debe ser el administrador del clúster para crear y gestionar los roles de usuario. Puede asociar los usuarios con la máquina virtual de almacenamiento del clúster o con la máquina virtual de almacenamiento.
+* Necesita ONTAP 9.12.1 o versiones posteriores para usar la función de sincronización activa de SnapMirror.
+* Para utilizar la función Instantánea a prueba de manipulaciones (TPS):
++
+** Necesita ONTAP 9.13.1 y versiones posteriores para SAN
+** Necesita ONTAP 9.12.1 y versiones posteriores para NFS
+
+
+* Para NVMe over TCP y NVMe over FC se necesita ONTAP 9.10,1 y posterior.
+
+
+
+NOTE: A partir de la versión 9.11.1 de ONTAP, la comunicación con el clúster de ONTAP se realiza mediante las API DE REST. El usuario de ONTAP debe tener activada la aplicación http. Sin embargo, si se encuentran problemas con las API REST DE ONTAP, la clave de configuración 'FORCE_zapi' ayuda a la conmutación al flujo de trabajo de ZAPI tradicional. Puede que necesite agregar o actualizar esta clave mediante LAS API DE configuración y establecerla en true. Consulte el artículo de la base de conocimientos https://kb.netapp.com/mgmt/SnapCenter/How_to_use_RestAPI_to_edit_configuration_parameters_in_SCV["Cómo usar RestAPI para editar parámetros de configuración en SCV"] para obtener más información.

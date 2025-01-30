@@ -1,0 +1,36 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_how_to_configure_ontap_rbac_for_snapcenter_plug-in_for_vmware_vsphere.html 
+keywords:  
+summary: 'El control de acceso basado en roles de ONTAP se aplica únicamente a trabajos coherentes con las aplicaciones del servidor de SnapCenter (aplicación a través de VMDK).' 
+---
+= Cómo configurar el control de acceso basado en roles de ONTAP para el plugin de SnapCenter para VMware vSphere
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+El control de acceso basado en roles de ONTAP se aplica únicamente a trabajos coherentes con las aplicaciones del servidor de SnapCenter (aplicación a través de VMDK).
+
+
+NOTE: A partir del plugin de SnapCenter para VMware (SCV) 5,0, es necesario añadir aplicaciones de tipo HTTP y ONTAPI como métodos de inicio de sesión de usuario para cualquier usuario de ONTAP con acceso personalizado basado en roles a SCV. Sin el acceso a estas aplicaciones, los backups fallarán. Es necesario reiniciar el servicio de SCV para reconocer los cambios en los métodos de inicio de sesión de usuarios de ONTAP. Para obtener información sobre la creación o modificación de cuentas de conexión, consulte https://docs.netapp.com/us-en/ontap/authentication/config-worksheets-reference.html["Hojas de cálculo para la autenticación del administrador y la configuración de RBAC"].
+
+Es necesario configurar el control de acceso basado en roles de ONTAP en el sistema de almacenamiento para poder usarlo con el plugin de SnapCenter para VMware vSphere. En ONTAP, se deben ejecutar las siguientes tareas.
+
+* Crear un rol único.
++
+https://docs.netapp.com/us-en/ontap/concepts/administrator-authentication-rbac-concept.html["Autenticación de administrador y RBAC"]
+
+* Crear un nombre de usuario y una contraseña (credenciales del sistema de almacenamiento) en ONTAP para el rol.
++
+Estas credenciales del sistema de almacenamiento son necesarias para configurar los sistemas de almacenamiento para el plugin de SnapCenter para VMware vSphere. Para hacerlo, se deben introducir las credenciales en el plugin. Cada vez que se inicia sesión en un sistema de almacenamiento con estas credenciales, se muestra el conjunto de funciones de SnapCenter que se configuraron en ONTAP al crear las credenciales.
+
+
+
+Es posible usar el inicio de sesión de administrador o de raíz para acceder a todas las tareas de SnapCenter; sin embargo, es recomendable usar la función de RBAC proporcionada por ONTAP para crear una o varias cuentas personalizadas con privilegios de acceso limitados.
+
+Para obtener más información, consulte link:scpivs44_minimum_ontap_privileges_required.html["Privilegios mínimos requeridos de ONTAP"^].
