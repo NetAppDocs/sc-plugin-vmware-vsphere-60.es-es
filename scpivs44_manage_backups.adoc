@@ -30,7 +30,7 @@ image:scv50_image1.png["Pantalla del cliente de vSphere"]
 . En la ficha Configurar, seleccione una copia de seguridad y haga clic en *Cambiar nombre*.
 . En el cuadro de diálogo *Renombrar copia de seguridad*, introduzca el nuevo nombre y haga clic en *Aceptar*.
 +
-No utilice los siguientes caracteres especiales en nombres de equipos virtuales, almacenes de datos, políticas, backups o grupos de recursos: & * $ # @ ! \ / : * ? " < > - | ; ' , . Se permite el carácter de guion bajo (_).
+No utilice los siguientes caracteres especiales en nombres de equipos virtuales, almacenes de datos, políticas, backups o grupos de recursos: & * $ # @ ! \ / : * ? " < > - | ; ', y espacio. Se permite el carácter de guion bajo (_).
 
 
 
